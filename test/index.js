@@ -1,9 +1,8 @@
 'use strict';
+/* eslint space-before-function-paren: 0 */
+
 var assert = require('assert');
-var request = require('supertest');
-var should = require("should");
-var assert = require("assert");
-var fs = require("fs");
+var fs = require('fs');
 var path = require('path');
 var validator = require('validator');
 var imageModelStorage = require('../lib');
@@ -54,17 +53,17 @@ describe('image-model-storage', function() {
       if (error) {
         throw new Error('Waterline: ' + error);
       }
-      models.Image = ontology.collections['image'];
+      models.Image = ontology.collections.image;
       assert(models.Image !== null);
       done();
     });
   });
 
-  it("should be able to save files", function(done) {
+  it('should be able to save files', function(done) {
     var files = [{
-      fd: path.resolve(__dirname, "./data/1.jpg")
+      fd: path.resolve(__dirname, './data/1.jpg')
     }, {
-      fd: path.resolve(__dirname, "./data/2.jpg")
+      fd: path.resolve(__dirname, './data/2.jpg')
     }];
     imageModelStorage.save(models, files, config, function(error, results) {
       assert.equal(true, results.length === 2);
