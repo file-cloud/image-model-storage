@@ -1,0 +1,54 @@
+{
+  "name": "image-model-storage",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "calidion",
+    "email": "calidion@gmail.com",
+    "url": "blog.3gcnbeta.com"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "keywords": [
+    "node",
+    "image",
+    "model",
+    "storage"
+  ],
+  "devDependencies": {
+    "eslint-config-xo-space": "^0.7.0",
+    "file-cloud-uploader": "0.0.3",
+    "gulp": "^3.9.0",
+    "gulp-coveralls": "^0.1.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-exclude-gitignore": "^1.0.0",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-mocha": "^2.0.0",
+    "gulp-nsp": "^2.1.0",
+    "gulp-plumber": "^1.0.0",
+    "sails-memory": "^0.10.6",
+    "should": "^8.3.1",
+    "supertest": "^1.2.0",
+    "validator": "^5.2.0",
+    "waterline": "^0.12.1"
+  },
+  "eslintConfig": {
+    "extends": "xo-space",
+    "env": {
+      "mocha": true
+    }
+  },
+  "repository": "file-cloud/image-model-storage",
+  "scripts": {
+    "prepublish": "gulp prepublish",
+    "test": "gulp"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "file-cloud-uploader": "0.0.3"
+  }
+}
