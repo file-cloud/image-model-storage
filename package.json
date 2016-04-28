@@ -49,6 +49,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "async": "^2.0.0-rc.3",
-    "file-cloud-uploader": "0.0.3"
+    "file-cloud-uploader": "0.0.3",
+    "request": "^2.72.0"
   }
 }
