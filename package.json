@@ -50,6 +50,7 @@
   "dependencies": {
     "async": "^2.0.0-rc.3",
     "file-cloud-uploader": "0.0.3",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "temp": "^0.8.3"
   }
 }
