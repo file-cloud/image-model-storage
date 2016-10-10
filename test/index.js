@@ -100,4 +100,89 @@ describe('image-model-storage', function () {
       done();
     });
   });
+
+  it('should fail on _onDirCreated', function (done) {
+    var cb = imageModelStorage._onDirCreated(null, null, function (error, data) {
+      assert.equal(true, error);
+      assert.equal(true, data === 'error');
+      done();
+    });
+    cb('error', 'something');
+  });
+
+  it('should fail on _onFileDetermined', function (done) {
+    var cb = imageModelStorage._onFileDetermined(null, null, null, function (error, data) {
+      assert.equal(true, error);
+      assert.equal(true, data === 'error');
+      done();
+    });
+    cb('error');
+  });
+
+  it('should fail on _onDownloaded', function (done) {
+    var cb = imageModelStorage._onDownloaded(null, null, null, function (error, data) {
+      assert.equal(true, error);
+      assert.equal(true, data.length === 1);
+      done();
+    });
+    cb({
+      headers: {
+        'content-type': ''
+      }
+    });
+  });
+
+  it('should fail on _onSave', function (done) {
+    var cb = imageModelStorage._onSave(null, null, null, function (error) {
+      assert.equal(null, error);
+      done();
+    });
+    cb({
+      error: 'error'
+    });
+  });
+
+  it('should fail on _onFind', function (done) {
+    var cb = imageModelStorage._onFind(null, null, null, function (error, image) {
+      assert.equal(null, error);
+      assert.equal(undefined, image);
+      done();
+    });
+    cb(true);
+  });
+
+  it('should fail on _onFind', function (done) {
+    var cb = imageModelStorage._onFind(null, null, null, function (error, image) {
+      assert.equal(null, error);
+      assert.equal('image', image);
+      done();
+    });
+    cb(null, 'image');
+  });
+
+  it('should fail on _onCreated', function (done) {
+    var cb = imageModelStorage._onCreated(function (error, image) {
+      assert.equal(null, error);
+      assert.equal(undefined, image);
+      done();
+    });
+    cb(true);
+  });
+
+  it('should fail on _onCreated', function (done) {
+    var cb = imageModelStorage._onCreated(function (error, image) {
+      assert.equal(null, error);
+      assert.equal('image', image);
+      done();
+    });
+    cb(null, 'image');
+  });
+  it('should fail on _onCreated', function (done) {
+    var cb = imageModelStorage._onCreated(function (error, image) {
+      assert.equal(null, error);
+      assert.equal(undefined, image);
+      done();
+    });
+    cb(null);
+  });
 });

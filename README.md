@@ -12,7 +12,11 @@ $ npm install --save image-model-storage
 ```js
 var imageModelStorage = require('image-model-storage');
 
-imageModelStorage('Rainbow');
+//
+imageModelStorage.save
+//
+imageModelStorage.saveUrl
+
 ```
 ## License
 
