@@ -89,7 +89,17 @@ describe('image-model-storage', function () {
       done();
     });
   });
-
+  it('should fetch cdnified url and save the file', function (done) {
+    var url = '  http://www.t1bao.com/images/logo.png';
+    imageModelStorage.saveUrl(models, url, config, function (error, data) {
+      assert.equal(true, !error);
+      assert.equal(true, typeof data.hash === 'string');
+      assert.equal(true, validator.isURL(data.url));
+      assert.equal(true, typeof data.id === 'number');
+      assert.equal(true, typeof data.hash === 'string');
+      done();
+    });
+  });
   it('should fetch a more complicated url and save the file', function (done) {
     var url = 'http://wx.qlogo.cn/mmopen/PiajxSqBRaEK5ad1JqVK6qFcMTe0icWqIEu32CgWjtBSOV9yUyG7z0wLaywNbjTic7TNYibmRFkVKQhPSibJJtVZA7Q/0';
     imageModelStorage.saveUrl(models, url, config, function (error, data) {
@@ -101,8 +111,8 @@ describe('image-model-storage', function () {
     });
   });
 
-  it('should fail on _onDirCreated', function (done) {
-    var cb = imageModelStorage._onDirCreated(null, null, function (error, data) {
+  it('should fail on _onFetchedUrl', function (done) {
+    var cb = imageModelStorage._onFetchedUrl(null, null, null, function (error, data) {
       assert.equal(true, error);
       assert.equal(true, data === 'error');
       done();
@@ -110,8 +120,8 @@ describe('image-model-storage', function () {
     cb('error', 'something');
   });
 
-  it('should fail on _onFileDetermined', function (done) {
-    var cb = imageModelStorage._onFileDetermined(null, null, null, function (error, data) {
+  it('should fail on _onDirCreated', function (done) {
+    var cb = imageModelStorage._onDirCreated(null, null, function (error, data) {
       assert.equal(true, error);
       assert.equal(true, data === 'error');
       done();
@@ -119,13 +129,39 @@ describe('image-model-storage', function () {
     cb('error');
   });
 
-  it('should fail on _onDownloaded', function (done) {
-    var cb = imageModelStorage._onDownloaded(null, null, null, function (error, data) {
+  it('should fail on _onDownloadError', function (done) {
+    var cb = imageModelStorage._onDownloadError(function (error, data) {
+      assert.equal(true, error);
+      assert.equal(true, data === 'error');
+      done();
+    });
+    cb({
+      message: 'error'
+    });
+  });
+
+  it('should fail on _onDownloadFinish', function (done) {
+    var cb = imageModelStorage._onDownloadFinish(function (error, data) {
       assert.equal(true, error);
       assert.equal(true, data.length === 1);
       done();
     });
     cb({
+      statusCode: 200,
+      headers: {
+        'content-type': ''
+      }
+    });
+  });
+
+  it('should fail on _onDownloadFinish', function (done) {
+    var cb = imageModelStorage._onDownloadFinish(function (error, data) {
+      assert.equal(true, error);
+      assert.equal(true, data.indexOf('Response status: ') !== -1);
+      done();
+    });
+    cb({
+      statusCode: 100,
       headers: {
         'content-type': ''
       }
